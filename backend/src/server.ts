@@ -3,13 +3,13 @@ import { setupWebSocket } from './sockets/chat.socket';
 
 const start = async () => {
   try {
-    const address = await app.listen({ port: 3000 });
+    const address = await app.listen({ port: 3000 }); // all interfaces..
     console.log(`✅ Server running at ${address}`);
 
-    // Get the raw Node HTTP server from Fastify
+    // get the raw Node HTTP server from fastify
     const httpServer = app.server;
 
-    // Attach WebSocket server
+    // Attach ws server
     setupWebSocket(httpServer);
 
   } catch (err) {
