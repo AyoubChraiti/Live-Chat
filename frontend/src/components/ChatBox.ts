@@ -71,8 +71,8 @@ function setupEvents() {
   const senderInput = document.querySelector<HTMLInputElement>('#sender')!;
   const messagesBox = document.querySelector<HTMLDivElement>('#messages')!;
 
-  // Load chat history once sender is typed or on page load if sender input has value
-  // Wait for sender input change or blur
+  // load chat history once sender is typed or on page load if sender input has value
+  // wait for sender input change or blur
   function tryLoadHistory() {
     if (senderInput.value.trim()) {
       loadHistory(messagesBox, senderInput.value.trim());
@@ -82,7 +82,7 @@ function setupEvents() {
   }
   senderInput.addEventListener('blur', tryLoadHistory);
   senderInput.addEventListener('change', tryLoadHistory);
-  // Also try loading immediately if sender already has a value
+  // loding immediately if sender already has a value
   if (senderInput.value.trim()) {
     loadHistory(messagesBox, senderInput.value.trim());
   }

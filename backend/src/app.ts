@@ -3,7 +3,7 @@ import { chatRoutes } from './routes/chat.route';
 
 const app = Fastify();
 
-// Add routes, plugins, WS, etc. later:
+// Add routes, plugins, WS, .. later:
 app.register(chatRoutes);
 
 export default app;
