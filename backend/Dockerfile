@@ -6,7 +6,7 @@ COPY package*.json ./
 RUN npm ci && npm cache clean --force
 COPY tsconfig.json ./
 COPY src ./src
-RUN npm run build  # Assumes `tsc` builds to `dist`
+RUN npm run build
 
 FROM node:20-alpine
 
@@ -16,10 +16,10 @@ COPY package*.json ./
 RUN npm ci --only=production && npm cache clean --force
 
 # SQLite needs no extra deps in alpine
-EXPOSE 3000  # Safe port for non-root users
+EXPOSE 3000
 
 # Run as non-root for security
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
 
-CMD ["node", "dist/server.js"]  # Adjust if your entrypoint differs
+CMD ["node", "dist/server.js"]
