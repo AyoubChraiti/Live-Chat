@@ -5,13 +5,13 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci && npm cache clean --force
 COPY . .
-RUN npm run build  # Assumes Vite or similar builds to `dist`
+RUN npm run build
 
 # Serve with a lightweight server
 FROM nginx:alpine
 
 COPY --from=builder /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf  # Custom Nginx config for WebSocket proxy
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 8080  # Safe port for non-root users
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
