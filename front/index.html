@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Chat App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div class="login-screen" id="loginScreen">
+            <h1>💬 Live Chat</h1>
+            <div class="login-form">
+                <div class="input-group">
+                    <input type="text" id="loginUsername" placeholder="Username" />
+                </div>
+                <div class="input-group">
+                    <input type="password" id="loginPassword" placeholder="Password" />
+                </div>
+                <button class="btn btn-primary" onclick="login()">Login</button>
+                <button class="btn btn-secondary" onclick="register()">Register</button>
+            </div>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="sidebar hidden" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Chats</h2>
+                <div class="username" id="currentUsername"></div>
+                <div class="connection-status" id="connectionStatus">●</div>
+            </div>
+            <div class="user-list" id="userList"></div>
+        </div>
+
+        <div class="chat-area hidden" id="chatArea">
+            <div class="chat-header">
+                <h3 id="chatUsername">Select a user to chat</h3>
+                <div class="chat-actions">
+                    <button class="icon-btn" onclick="viewProfile()" title="View Profile">👤 Profile</button>
+                    <button class="icon-btn" onclick="inviteToGame()" title="Invite to Game">🎮 Invite</button>
+                    <button class="icon-btn" id="blockBtn" onclick="toggleBlockUser()" title="Block/Unblock User">🚫 Block</button>
+                    <button class="icon-btn" onclick="logout()" title="Logout">🚪 Logout</button>
+                </div>
+            </div>
+            <div class="messages" id="messages"></div>
+            <div class="typing-indicator hidden" id="typingIndicator"></div>
+            <div class="message-input">
+                <input type="text" id="messageInput" placeholder="Type a message..." onkeyup="handleTyping(event)" />
+                <button class="send-btn" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>User Profile</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="profileContent"></div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-header" id="notificationHeader"></div>
+        <div class="notification-body" id="notificationBody"></div>
+        <div class="notification-actions" id="notificationActions"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
