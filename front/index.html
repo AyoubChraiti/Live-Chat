@@ -1,75 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Chat App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>VALORANT Live Chat</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'valo-dark': {
+                bg: '#0F1923',
+                'bg-secondary': '#1C252E',
+                'bg-tertiary': '#293139',
+                border: '#3E4C59',
+              },
+              'valo-light': {
+                bg: '#ECE8E1',
+                'bg-secondary': '#F5F1EB',
+                'bg-tertiary': '#FFFFFF',
+                border: '#D1CAC1',
+              },
+              'valo-red': {
+                DEFAULT: '#FF4655',
+                dark: '#BD3944',
+                light: '#FF6B76',
+              },
+              'valo-blue': {
+                DEFAULT: '#53EDFC',
+                dark: '#42C5D1',
+                light: '#7FF1FC',
+              },
+              'valo-gold': {
+                DEFAULT: '#FDBA74',
+                dark: '#F59E42',
+                light: '#FFCFA3',
+              },
+              'valo-purple': {
+                DEFAULT: '#AA8FFF',
+                dark: '#8B72D9',
+                light: '#C3AFFF',
+              },
+              'valo-green': {
+                DEFAULT: '#3FE88E',
+                dark: '#2BB76A',
+                light: '#6FFFA8',
+              },
+            },
+            animation: {
+              'slide-in': 'slideIn 0.3s ease-out',
+              'fade-in': 'fadeIn 0.2s ease-in',
+              'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+            },
+            keyframes: {
+              slideIn: {
+                '0%': { transform: 'translateX(-100%)', opacity: '0' },
+                '100%': { transform: 'translateX(0)', opacity: '1' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              pulseGlow: {
+                '0%, 100%': { opacity: '1', boxShadow: '0 0 10px currentColor' },
+                '50%': { opacity: '0.7', boxShadow: '0 0 20px currentColor' },
+              },
+            },
+          },
+        },
+      }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <!-- Login Screen -->
-        <div class="login-screen" id="loginScreen">
-            <h1>💬 Live Chat</h1>
-            <div class="login-form">
-                <div class="input-group">
-                    <input type="text" id="loginUsername" placeholder="Username" />
-                </div>
-                <div class="input-group">
-                    <input type="password" id="loginPassword" placeholder="Password" />
-                </div>
-                <button class="btn btn-primary" onclick="login()">Login</button>
-                <button class="btn btn-secondary" onclick="register()">Register</button>
-            </div>
-        </div>
-
-        <!-- Chat Interface -->
-        <div class="sidebar hidden" id="sidebar">
-            <div class="sidebar-header">
-                <h2>Chats</h2>
-                <div class="username" id="currentUsername"></div>
-                <div class="connection-status" id="connectionStatus">●</div>
-            </div>
-            <div class="user-list" id="userList"></div>
-        </div>
-
-        <div class="chat-area hidden" id="chatArea">
-            <div class="chat-header">
-                <h3 id="chatUsername">Select a user to chat</h3>
-                <div class="chat-actions">
-                    <button class="icon-btn" onclick="viewProfile()" title="View Profile">👤 Profile</button>
-                    <button class="icon-btn" onclick="inviteToGame()" title="Invite to Game">🎮 Invite</button>
-                    <button class="icon-btn" id="blockBtn" onclick="toggleBlockUser()" title="Block/Unblock User">🚫 Block</button>
-                    <button class="icon-btn" onclick="logout()" title="Logout">🚪 Logout</button>
-                </div>
-            </div>
-            <div class="messages" id="messages"></div>
-            <div class="typing-indicator hidden" id="typingIndicator"></div>
-            <div class="message-input">
-                <input type="text" id="messageInput" placeholder="Type a message..." onkeyup="handleTyping(event)" />
-                <button class="send-btn" onclick="sendMessage()">Send</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Profile Modal -->
-    <div class="modal" id="profileModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>User Profile</h2>
-                <button class="close-btn" onclick="closeModal()">&times;</button>
-            </div>
-            <div id="profileContent"></div>
-        </div>
-    </div>
-
-    <!-- Notification -->
-    <div class="notification" id="notification">
-        <div class="notification-header" id="notificationHeader"></div>
-        <div class="notification-body" id="notificationBody"></div>
-        <div class="notification-actions" id="notificationActions"></div>
-    </div>
-
-    <script src="script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
