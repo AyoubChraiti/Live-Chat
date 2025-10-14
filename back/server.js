@@ -6,10 +6,8 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const crypto = require('crypto');
 
-// Initialize database
 const db = new sqlite3.Database('./chat.db');
 
-// Create tables
 db.serialize(() => {
   // Users table
   db.run(`CREATE TABLE IF NOT EXISTS users (
@@ -77,7 +75,6 @@ db.serialize(() => {
   )`);
 });
 
-// WebSocket connections store
 const connections = new Map();
 
 // Register plugins
@@ -88,13 +85,11 @@ fastify.register(fastifyCors, {
 
 fastify.register(fastifyWebsocket);
 
-// Remove static file serving since Vite will handle the frontend
-
-// Helper functions
 function hashPassword(password) {
   return crypto.createHash('sha256').update(password).digest('hex');
 }
 
+// blocked endpoint
 function isBlocked(blockerId, blockedId, callback) {
   db.get(
     'SELECT * FROM blocked_users WHERE blocker_id = ? AND blocked_id = ?',
