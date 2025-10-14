@@ -54,6 +54,14 @@ export const Chat = () => {
         if (incomingReceiverId === currentUserRef.current?.id && incomingSenderId !== currentUserRef.current?.id) {
           console.log('✅ Message is for us from user:', incomingSenderId);
           
+          // Check if the sender is blocked
+          const senderIsBlocked = selectedUserRef.current?.id === incomingSenderId && selectedUserRef.current?.isBlocked;
+          
+          if (senderIsBlocked) {
+            console.log('🚫 Message from blocked user, ignoring');
+            return;
+          }
+          
           const newMessage: Message = {
             id: data.id || Date.now(),
             sender_id: incomingSenderId!,
@@ -178,7 +186,7 @@ export const Chat = () => {
 
   const loadUsers = async () => {
     try {
-      const response = await fetch(`${API_URL}/users`);
+      const response = await fetch(`${API_URL}/users?userId=${currentUser?.id}`);
       const allUsers = await response.json();
       setUsers(allUsers.filter((u: User) => u.id !== currentUser?.id));
     } catch (error) {
@@ -194,7 +202,19 @@ export const Chat = () => {
         `${API_URL}/messages/${currentUser.id}/${selectedUser.id}`
       );
       const msgs = await response.json();
-      setMessages(msgs);
+      
+      // Map backend fields to frontend Message type
+      const mappedMessages = msgs.map((msg: any) => ({
+        id: msg.id,
+        sender_id: msg.sender_id,
+        receiver_id: msg.receiver_id,
+        message: msg.content, // Backend uses 'content', frontend uses 'message'
+        timestamp: msg.created_at,
+        senderUsername: msg.sender_username
+      }));
+      
+      console.log('📥 Loaded messages:', mappedMessages.length);
+      setMessages(mappedMessages);
     } catch (error) {
       console.error('Failed to load messages:', error);
     }
@@ -202,6 +222,12 @@ export const Chat = () => {
 
   const handleSendMessage = (message: string) => {
     if (!selectedUser || !currentUser) return;
+
+    // Prevent sending messages if user is blocked
+    if (selectedUser.isBlocked) {
+      console.log('Cannot send message to blocked user');
+      return;
+    }
 
     const tempId = `temp-${tempMessageCounter}`;
     setTempMessageCounter((prev) => prev + 1);
@@ -261,12 +287,20 @@ export const Chat = () => {
 
     try {
       const isBlocked = selectedUser.isBlocked;
-      await fetch(`${API_URL}/users/${currentUser.id}/${isBlocked ? 'unblock' : 'block'}/${selectedUser.id}`, {
+      const endpoint = isBlocked ? 'unblock' : 'block';
+      
+      await fetch(`${API_URL}/users/${currentUser.id}/${endpoint}/${selectedUser.id}`, {
         method: 'POST',
       });
       
-      setSelectedUser({ ...selectedUser, isBlocked: !isBlocked });
-      loadUsers();
+      // Update selected user
+      const updatedSelectedUser = { ...selectedUser, isBlocked: !isBlocked };
+      setSelectedUser(updatedSelectedUser);
+      
+      // Update users list
+      setUsers(users.map(u => 
+        u.id === selectedUser.id ? updatedSelectedUser : u
+      ));
     } catch (error) {
       console.error('Failed to block/unblock user:', error);
     }
@@ -318,7 +352,8 @@ export const Chat = () => {
         <MessageInput
           onSendMessage={handleSendMessage}
           onTyping={handleTyping}
-          disabled={!selectedUser}
+          disabled={!selectedUser || selectedUser.isBlocked}
+          isBlocked={selectedUser?.isBlocked}
         />
       </div>
 

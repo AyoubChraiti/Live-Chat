@@ -52,12 +52,13 @@ export function setupWebSocket(fastify: FastifyInstance): void {
           }
 
           if (type === 'message' && receiverId && content) {
-            // Check for blocking
-            const blocked = await databaseService.isBlocked(receiverId, senderId);
+            // Check for blocking in both directions
+            const senderBlockedByReceiver = await databaseService.isBlocked(receiverId, senderId);
+            const receiverBlockedBySender = await databaseService.isBlocked(senderId, receiverId);
             
-            if (blocked) {
+            if (senderBlockedByReceiver || receiverBlockedBySender) {
               connection.socket.send(
-                JSON.stringify({ type: 'error', message: 'You are blocked by this user.' })
+                JSON.stringify({ type: 'error', message: 'Cannot send message to this user.' })
               );
               return;
             }

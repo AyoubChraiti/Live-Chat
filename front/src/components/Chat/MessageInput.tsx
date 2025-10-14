@@ -6,11 +6,18 @@ interface MessageInputProps {
   onSendMessage: (message: string) => void;
   onTyping: (isTyping: boolean) => void;
   disabled?: boolean;
+  isBlocked?: boolean;
 }
 
-export const MessageInput = ({ onSendMessage, onTyping, disabled }: MessageInputProps) => {
+export const MessageInput = ({ onSendMessage, onTyping, disabled, isBlocked }: MessageInputProps) => {
   const [message, setMessage] = useState('');
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
+
+  const getPlaceholder = () => {
+    if (isBlocked) return 'You have blocked this agent';
+    if (disabled) return 'Select an agent to chat';
+    return 'Type a message...';
+  };
 
   const handleTyping = (value: string) => {
     setMessage(value);
@@ -60,7 +67,7 @@ export const MessageInput = ({ onSendMessage, onTyping, disabled }: MessageInput
           value={message}
           onChange={(e) => handleTyping(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder={disabled ? 'Select an agent to chat' : 'Type a message...'}
+          placeholder={getPlaceholder()}
           disabled={disabled}
           className="flex-1 px-4 py-3 bg-valo-dark-bg-tertiary border-2 border-valo-dark-border text-white placeholder-gray-500 focus:outline-none focus:border-valo-red transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed rounded"
         />
