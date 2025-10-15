@@ -44,7 +44,7 @@ export function setupWebSocket(fastify: FastifyInstance): void {
             key => connections.get(key) === connection.socket
           );
 
-          if (!senderId) {
+          if (!senderId) { // in case sm1 sends from terminal .
             connection.socket.send(
               JSON.stringify({ type: 'error', message: 'Authentication required' })
             );
@@ -87,7 +87,9 @@ export function setupWebSocket(fastify: FastifyInstance): void {
                 })
               );
             }
-          } else if (type === 'typing' && receiverId !== undefined) {
+          }
+          // idnt think this is used ig. 
+          else if (type === 'typing' && receiverId !== undefined) {
             const receiverSocket = connections.get(receiverId);
             if (receiverSocket) {
               receiverSocket.send(

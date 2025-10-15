@@ -104,8 +104,10 @@ export class DatabaseService {
         'SELECT * FROM users WHERE username = ? AND password = ?',
         [username, hashedPassword],
         (err, row: User) => {
-          if (err) reject(err);
-          else resolve(row);
+          if (err)
+            reject(err);
+          else
+            resolve(row);
         }
       );
     });
@@ -117,8 +119,10 @@ export class DatabaseService {
         'SELECT id, username, bio, avatar, status, created_at FROM users WHERE id = ?',
         [id],
         (err, row: User) => {
-          if (err) reject(err);
-          else resolve(row);
+          if (err)
+            reject(err);
+          else 
+            resolve(row);
         }
       );
     });
@@ -130,8 +134,10 @@ export class DatabaseService {
         'SELECT id, username, status FROM users',
         [],
         (err, rows: User[]) => {
-          if (err) reject(err);
-          else resolve(rows);
+          if (err)
+            reject(err);
+          else 
+            resolve(rows);
         }
       );
     });
@@ -183,8 +189,10 @@ export class DatabaseService {
         'SELECT * FROM messages WHERE id = ?',
         [id],
         (err, row: Message) => {
-          if (err) reject(err);
-          else resolve(row);
+          if (err)
+            reject(err);
+          else
+            resolve(row);
         }
       );
     });

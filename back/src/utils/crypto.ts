@@ -1,5 +1,7 @@
 import crypto from 'crypto';
 
+// for haching stufff
+
 export function hashPassword(password: string): string {
   return crypto.createHash('sha256').update(password).digest('hex');
 }

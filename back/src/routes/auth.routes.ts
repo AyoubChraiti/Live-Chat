@@ -3,7 +3,7 @@ import { databaseService } from '../services/database.service';
 import { hashPassword } from '../utils/crypto';
 
 export async function authRoutes(fastify: FastifyInstance) {
-  // User registration
+  // usr regis
   fastify.post('/api/register', async (request, reply) => {
     const { username, password } = request.body as { username: string; password: string };
     const hashedPassword = hashPassword(password);
@@ -16,7 +16,7 @@ export async function authRoutes(fastify: FastifyInstance) {
     }
   });
 
-  // User login
+  // urs login
   fastify.post('/api/login', async (request, reply) => {
     const { username, password } = request.body as { username: string; password: string };
     const hashedPassword = hashPassword(password);
