@@ -3,23 +3,23 @@ import type { WebSocket } from 'ws';
 import { databaseService } from '../services/database.service';
 import { WebSocketMessage } from '../types';
 
-// WebSocket connections store
+// ws connections store
 const connections = new Map<number, WebSocket>();
 
 export function broadcastToUser(userId: number, data: any): void {
   const userIdNum = parseInt(String(userId));
   const conn = connections.get(userIdNum);
   
-  console.log(`📡 Broadcasting to user ${userIdNum}:`, data.type);
-  console.log(`🔗 Connection exists:`, !!conn);
-  console.log(`🔗 Connection ready:`, conn?.readyState === 1);
-  console.log(`🗺️ All connections:`, Array.from(connections.keys()));
+  console.log(`Broadcasting to user ${userIdNum}:`, data.type);
+  console.log(`Connection exists:`, !!conn);
+  console.log(`Connection ready:`, conn?.readyState === 1);
+  console.log(`All connections:`, Array.from(connections.keys()));
   
   if (conn && conn.readyState === 1) {
     conn.send(JSON.stringify(data));
-    console.log(`✅ Message sent to user ${userIdNum}`);
+    console.log(`Message sent to user ${userIdNum}`);
   } else {
-    console.log(`❌ Cannot send to user ${userIdNum} - not connected`);
+    console.log(`Cannot send to user ${userIdNum} - not connected`);
   }
 }
 
@@ -52,7 +52,7 @@ export function setupWebSocket(fastify: FastifyInstance): void {
           }
 
           if (type === 'message' && receiverId && content) {
-            // Check for blocking in both directions
+            // check for blocking in both directions
             const senderBlockedByReceiver = await databaseService.isBlocked(receiverId, senderId);
             const receiverBlockedBySender = await databaseService.isBlocked(senderId, receiverId);
             
