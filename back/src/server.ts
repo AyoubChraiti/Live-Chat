@@ -10,7 +10,6 @@ import { gameRoutes } from './routes/game.routes';
 
 const server = fastify({ logger: true });
 
-// Register plugins
 server.register(fastifyCors, {
   origin: config.corsOrigins,
   credentials: true
@@ -27,7 +26,7 @@ server.register(userRoutes);
 server.register(messageRoutes);
 server.register(gameRoutes);
 
-// Start server
+// server
 const start = async () => {
   try {
     await server.listen({ port: config.port, host: config.host });
