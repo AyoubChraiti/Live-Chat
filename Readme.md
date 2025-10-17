@@ -42,7 +42,7 @@ Users can register, log in, send messages instantly, and manage profiles in a re
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/<your-username>/Live-Chat.git
+git clone https://github.com/AyoubChraiti/Live-Chat.git
 cd Live-Chat
 ```
 
