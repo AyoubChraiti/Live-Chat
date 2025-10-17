@@ -1,6 +1,6 @@
 # Live-Chat
 
-[![GitHub stars](https://img.shields.io/github/stars/AyoubChraiti/Live-Chat?style=social)](https://github.com/AyoubChraiti/Live-Chat) [![GitHub license](https://img.shields.io/github/license/AyoubChraiti/Live-Chat)](https://github.com/AyoubChraiti/Live-Chat/blob/main/LICENSE) [![Node.js Version](https://img.shields.io/badge/node-%3E%3D%2020.0.0-green)](https://nodejs.org/) [![React Version](https://img.shields.io/badge/react-18.2.0-blue)](https://reactjs.org/)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D%2020.0.0-green)](https://nodejs.org/) [![React Version](https://img.shields.io/badge/react-18.2.0-blue)](https://reactjs.org/)
 
 A real-time chat application built with **React** (frontend) and **Fastify + WebSocket** (backend). Users can register, log in, send messages instantly, and manage profiles in a responsive, modern UI.
 
@@ -30,9 +30,8 @@ A real-time chat application built with **React** (frontend) and **Fastify + Web
       ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white&style=flat-square)
 
 ### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/AyoubChraiti/Live-Chat.git
-   cd Live-Chat
-   ```
+```bash
+git clone https://github.com/AyoubChraiti/Live-Chat.git
+cd Live-Chat
+```
 ETC...
