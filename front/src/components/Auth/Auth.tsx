@@ -45,10 +45,9 @@ export const Auth = ({ onBack }: AuthProps) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-valo-dark-bg dark:bg-valo-dark-bg relative overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-valo-red/5 rounded-full blur-3xl animate-pulse-glow" />
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-valo-blue/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1s' }} />
+      {/* Subtle Background matching Landing */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-valo-red/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 w-full max-w-md p-8">
