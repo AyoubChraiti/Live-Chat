@@ -360,7 +360,7 @@ export const Chat = () => {
       <Modal
         isOpen={profileModalOpen}
         onClose={() => setProfileModalOpen(false)}
-        title="Agent Profile"
+        title="User Profile"
       >
         {selectedUser && (
           <div className="space-y-4">
@@ -381,7 +381,7 @@ export const Chat = () => {
             </div>
             <div className="border-t-2 border-valo-dark-border pt-4 space-y-2">
               <div className="flex items-center justify-between p-3 bg-valo-dark-bg-tertiary border border-valo-dark-border rounded">
-                <span className="text-sm text-gray-400">Agent ID</span>
+                <span className="text-sm text-gray-400">User ID</span>
                 <span className="text-sm font-bold text-valo-gold">#{selectedUser.id}</span>
               </div>
               <div className="flex items-center justify-between p-3 bg-valo-dark-bg-tertiary border border-valo-dark-border rounded">

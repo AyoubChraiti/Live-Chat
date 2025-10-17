@@ -13,8 +13,10 @@ export const Icons = {
 
   Game: ({ className = "w-5 h-5" }: { className?: string }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M6 11h4M8 9v4M15 11h.01M18 11h.01M3 15a9 9 0 0 1 9-9 9 9 0 0 1 9 9" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M21 15a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2" strokeLinecap="round" strokeLinejoin="round"/>
+      <rect x="2" y="7" width="20" height="10" rx="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <circle cx="7" cy="12" r="1" fill="currentColor"/>
+      <circle cx="17" cy="12" r="1" fill="currentColor"/>
+      <path d="M12 7v10" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
 

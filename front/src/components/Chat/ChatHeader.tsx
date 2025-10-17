@@ -18,23 +18,23 @@ export const ChatHeader = ({
   isBlocked,
 }: ChatHeaderProps) => {
   return (
-    <div className="p-4 border-b-2 border-valo-dark-border bg-valo-dark-bg-secondary flex items-center justify-between">
+    <div className="p-4 border-b border-valo-dark-border/50 bg-valo-dark-bg flex items-center justify-between">
       <div className="flex items-center gap-3">
         {selectedUser ? (
           <>
             <div className="relative">
-              <div className="w-12 h-12 bg-valo-dark-bg-tertiary border-2 border-valo-red rounded-lg flex items-center justify-center">
-                <Icons.User className="w-6 h-6 text-valo-red" />
+              <div className="w-10 h-10 bg-valo-dark-bg-secondary border border-valo-red/30 flex items-center justify-center">
+                <Icons.User className="w-5 h-5 text-valo-red" />
               </div>
               {selectedUser.status === 'online' && (
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-valo-green border-2 border-valo-dark-bg-secondary rounded-full" />
+                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-valo-green border-2 border-valo-dark-bg rounded-full" />
               )}
             </div>
             <div>
-              <h3 className="text-xl font-bold uppercase tracking-wider text-white">
+              <h3 className="text-base font-semibold text-white">
                 {selectedUser.username}
               </h3>
-              <p className="text-xs text-gray-400 uppercase tracking-wide flex items-center gap-1">
+              <p className="text-xs text-gray-500 flex items-center gap-1">
                 <Icons.Online className={`w-2 h-2 ${selectedUser.status === 'online' ? 'text-valo-green' : 'text-gray-500'}`} />
                 {selectedUser.status || 'offline'}
               </p>
@@ -42,11 +42,11 @@ export const ChatHeader = ({
           </>
         ) : (
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-valo-dark-bg-tertiary border-2 border-valo-dark-border rounded-lg flex items-center justify-center">
-              <Icons.Message className="w-6 h-6 text-gray-500" />
+            <div className="w-10 h-10 bg-valo-dark-bg-secondary border border-valo-dark-border/50 flex items-center justify-center">
+              <Icons.Message className="w-5 h-5 text-gray-500" />
             </div>
-            <h3 className="text-xl font-bold uppercase tracking-wider text-gray-500">
-              Select an agent
+            <h3 className="text-base font-semibold text-gray-500">
+              Select a user
             </h3>
           </div>
         )}
@@ -59,8 +59,10 @@ export const ChatHeader = ({
             variant="icon"
             onClick={onViewProfile}
             title="View Profile"
+            className="border-valo-dark-border/50 hover:border-valo-red/50 px-3 py-2 flex items-center gap-1.5"
           >
-            <Icons.User className="w-5 h-5" />
+            <Icons.User className="w-4 h-4" />
+            <span className="text-xs font-medium">Profile</span>
           </Button>
           <Button
             size="sm"
@@ -68,17 +70,20 @@ export const ChatHeader = ({
             onClick={onInviteToGame}
             title="Invite to Game"
             disabled={isBlocked}
+            className="border-valo-dark-border/50 hover:border-valo-red/50 px-3 py-2 flex items-center gap-1.5"
           >
-            <Icons.Game className="w-5 h-5" />
+            <Icons.Game className="w-4 h-4" />
+            <span className="text-xs font-medium">Invite</span>
           </Button>
           <Button
             size="sm"
             variant="icon"
             onClick={onBlockUser}
             title={isBlocked ? 'Unblock User' : 'Block User'}
-            className={isBlocked ? 'border-valo-green text-valo-green hover:border-valo-green-dark' : 'border-red-500 text-red-500 hover:border-red-600'}
+            className={`px-3 py-2 flex items-center gap-1.5 ${isBlocked ? 'border-valo-green/50 text-valo-green hover:border-valo-green' : 'border-red-500/50 text-red-500 hover:border-red-500'}`}
           >
-            {isBlocked ? <Icons.Unblock className="w-5 h-5" /> : <Icons.Block className="w-5 h-5" />}
+            {isBlocked ? <Icons.Unblock className="w-4 h-4" /> : <Icons.Block className="w-4 h-4" />}
+            <span className="text-xs font-medium">{isBlocked ? 'Unblock' : 'Block'}</span>
           </Button>
         </div>
       )}

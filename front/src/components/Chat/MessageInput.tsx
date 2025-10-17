@@ -14,8 +14,8 @@ export const MessageInput = ({ onSendMessage, onTyping, disabled, isBlocked }: M
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 
   const getPlaceholder = () => {
-    if (isBlocked) return 'You have blocked this agent';
-    if (disabled) return 'Select an agent to chat';
+    if (isBlocked) return 'You have blocked this user';
+    if (disabled) return 'Select a user to chat';
     return 'Type a message...';
   };
 
@@ -60,7 +60,7 @@ export const MessageInput = ({ onSendMessage, onTyping, disabled, isBlocked }: M
   };
 
   return (
-    <div className="p-4 border-t-2 border-valo-dark-border bg-valo-dark-bg">
+    <div className="p-4 border-t border-valo-dark-border/50 bg-valo-dark-bg">
       <div className="flex gap-3 items-center">
         <input
           type="text"
@@ -69,15 +69,15 @@ export const MessageInput = ({ onSendMessage, onTyping, disabled, isBlocked }: M
           onKeyPress={handleKeyPress}
           placeholder={getPlaceholder()}
           disabled={disabled}
-          className="flex-1 px-4 py-3 bg-valo-dark-bg-tertiary border-2 border-valo-dark-border text-white placeholder-gray-500 focus:outline-none focus:border-valo-red transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed rounded"
+          className="flex-1 px-4 py-2.5 bg-valo-dark-bg-secondary border border-valo-dark-border/50 text-white placeholder-gray-500 focus:outline-none focus:border-valo-red/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
         />
         <Button
           onClick={handleSend}
           disabled={disabled || !message.trim()}
           variant="primary"
           size="md"
-          icon={<Icons.Send className="w-5 h-5" />}
-          className="px-5"
+          icon={<Icons.Send className="w-4 h-4" />}
+          className="px-4 py-2.5"
         >
           Send
         </Button>

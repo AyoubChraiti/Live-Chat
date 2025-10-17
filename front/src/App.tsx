@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { Auth } from './components/Auth/Auth';
 import { Chat } from './components/Chat/Chat';
+import { Landing } from './components/Landing/Landing';
 
 const AppContent = () => {
   const { currentUser, isLoading } = useAuth();
+  const [showAuth, setShowAuth] = useState(false);
 
   if (isLoading) {
     return (
@@ -16,7 +19,15 @@ const AppContent = () => {
     );
   }
 
-  return currentUser ? <Chat /> : <Auth />;
+  if (currentUser) {
+    return <Chat />;
+  }
+
+  if (showAuth) {
+    return <Auth onBack={() => setShowAuth(false)} />;
+  }
+
+  return <Landing onGetStarted={() => setShowAuth(true)} />;
 };
 
 function App() {
