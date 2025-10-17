@@ -2,8 +2,13 @@ import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
+import { ArrowLeft } from 'lucide-react';
 
-export const Auth = () => {
+interface AuthProps {
+  onBack?: () => void;
+}
+
+export const Auth = ({ onBack }: AuthProps) => {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -47,14 +52,22 @@ export const Auth = () => {
       </div>
 
       <div className="relative z-10 w-full max-w-md p-8">
+        {/* Back Button */}
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="mb-6 flex items-center gap-2 text-gray-400 hover:text-valo-red transition-colors group"
+          >
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            <span className="uppercase text-sm tracking-wide font-semibold">Back to Home</span>
+          </button>
+        )}
+
         {/* Logo/Title */}
         <div className="text-center mb-8">
-          <h1 className="text-6xl font-bold uppercase tracking-wider text-valo-red mb-2 drop-shadow-[0_0_10px_rgba(255,70,85,0.5)]">
-            VALORANT
+          <h1 className="text-4xl font-bold uppercase tracking-wider text-valo-red mb-2 drop-shadow-[0_0_20px_rgba(255,70,85,0.6)]">
+            LIVE CHAT
           </h1>
-          <p className="text-2xl font-semibold uppercase tracking-wide text-valo-blue">
-            Live Chat
-          </p>
         </div>
 
         {/* Auth Form */}

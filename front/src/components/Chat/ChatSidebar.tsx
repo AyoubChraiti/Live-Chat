@@ -32,35 +32,36 @@ export const ChatSidebar = ({
   };
 
   return (
-    <div className="w-80 bg-valo-dark-bg-secondary border-r-2 border-valo-dark-border flex flex-col">
+    <div className="w-72 bg-valo-dark-bg border-r border-valo-dark-border/50 flex flex-col">
       {/* Header */}
-      <div className="p-4 border-b-2 border-valo-dark-border">
+      <div className="p-4 border-b border-valo-dark-border/50">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold uppercase tracking-wider text-valo-red flex items-center gap-2">
-            <Icons.Message className="w-5 h-5" />
-            Agents
+          <Icons.Message className="w-6 h-6 text-valo-red" />
+          <h2 className="text-xl font-bold text-white">
+            Live Chat
           </h2>
           <Button
             onClick={onLogout}
             variant="icon"
             size="sm"
             title="Logout"
-            className="hover:border-red-500 hover:text-red-500"
+            className="hover:border-red-500/50 hover:text-red-500 border-valo-dark-border/50 px-3 py-2 flex items-center gap-1.5"
           >
-            <Icons.Logout className="w-5 h-5" />
+            <Icons.Logout className="w-4 h-4" />
+            <span className="text-xs font-medium">Logout</span>
           </Button>
         </div>
         
         {/* Current User */}
-        <div className="flex items-center gap-3 p-3 bg-valo-dark-bg-tertiary border-2 border-valo-dark-border rounded">
-          <div className="w-10 h-10 bg-valo-red/20 border-2 border-valo-red rounded-lg flex items-center justify-center">
-            <Icons.User className="w-5 h-5 text-valo-red" />
+        <div className="flex items-center gap-3 p-3 bg-valo-dark-bg-secondary border border-valo-dark-border/50">
+          <div className="w-8 h-8 bg-valo-red/10 border border-valo-red/30 flex items-center justify-center">
+            <Icons.User className="w-4 h-4 text-valo-red" />
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-bold text-white truncate">{currentUsername}</div>
+            <div className="text-sm font-medium text-white truncate">{currentUsername}</div>
             <div className="flex items-center gap-2 text-xs">
-              <div className={`w-2 h-2 rounded-full ${statusColors[connectionStatus]} animate-pulse`} />
-              <span className="text-gray-400">{statusLabels[connectionStatus]}</span>
+              <div className={`w-1.5 h-1.5 rounded-full ${statusColors[connectionStatus]}`} />
+              <span className="text-gray-500">{statusLabels[connectionStatus]}</span>
             </div>
           </div>
         </div>
@@ -70,10 +71,10 @@ export const ChatSidebar = ({
       <div className="flex-1 overflow-y-auto scrollbar-thin">
         {users.length === 0 ? (
           <div className="p-6 text-center">
-            <div className="w-16 h-16 bg-valo-dark-bg-tertiary border-2 border-valo-dark-border rounded-lg flex items-center justify-center mx-auto mb-3">
-              <Icons.User className="w-8 h-8 text-gray-500" />
+            <div className="w-12 h-12 bg-valo-dark-bg-secondary border border-valo-dark-border/50 flex items-center justify-center mx-auto mb-3">
+              <Icons.User className="w-6 h-6 text-gray-500" />
             </div>
-            <p className="text-gray-400 text-sm">No agents online</p>
+            <p className="text-gray-500 text-sm">No users online</p>
           </div>
         ) : (
           <div className="p-3 space-y-2">
@@ -82,31 +83,31 @@ export const ChatSidebar = ({
                 key={user.id}
                 onClick={() => onSelectUser(user)}
                 className={`
-                  w-full p-3 flex items-center gap-3 rounded
-                  border-2 transition-all duration-200
+                  w-full p-3 flex items-center gap-3
+                  border transition-all duration-200
                   ${
                     selectedUser?.id === user.id
-                      ? 'bg-valo-red/10 border-valo-red shadow-[0_0_10px_rgba(255,70,85,0.2)]'
-                      : 'bg-valo-dark-bg-tertiary border-valo-dark-border hover:border-valo-red/50 hover:bg-valo-dark-bg'
+                      ? 'bg-valo-red/5 border-valo-red/50'
+                      : 'bg-valo-dark-bg-secondary border-valo-dark-border/50 hover:border-valo-red/30 hover:bg-valo-dark-bg-secondary/50'
                   }
                 `}
               >
                 <div className="relative">
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center border-2 ${
-                    selectedUser?.id === user.id ? 'bg-valo-red/20 border-valo-red' : 'bg-valo-dark-bg border-valo-dark-border'
+                  <div className={`w-8 h-8 flex items-center justify-center border ${
+                    selectedUser?.id === user.id ? 'bg-valo-red/10 border-valo-red/30' : 'bg-valo-dark-bg border-valo-dark-border/50'
                   }`}>
-                    <Icons.User className={`w-5 h-5 ${selectedUser?.id === user.id ? 'text-valo-red' : 'text-gray-400'}`} />
+                    <Icons.User className={`w-4 h-4 ${selectedUser?.id === user.id ? 'text-valo-red' : 'text-gray-400'}`} />
                   </div>
                   {user.status === 'online' && (
-                    <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-valo-green border-2 border-valo-dark-bg-secondary rounded-full" />
+                    <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-valo-green border-2 border-valo-dark-bg rounded-full" />
                   )}
                 </div>
                 <div className="flex-1 text-left min-w-0">
-                  <div className={`font-semibold truncate ${selectedUser?.id === user.id ? 'text-white' : 'text-gray-300'}`}>
+                  <div className={`text-sm font-medium truncate ${selectedUser?.id === user.id ? 'text-white' : 'text-gray-300'}`}>
                     {user.username}
                   </div>
-                  <div className="text-xs text-gray-500 uppercase flex items-center gap-1">
-                    <Icons.Online className={`w-2 h-2 ${user.status === 'online' ? 'text-valo-green' : 'text-gray-600'}`} />
+                  <div className="text-xs text-gray-500 flex items-center gap-1">
+                    <Icons.Online className={`w-1.5 h-1.5 ${user.status === 'online' ? 'text-valo-green' : 'text-gray-600'}`} />
                     {user.status || 'offline'}
                   </div>
                 </div>
