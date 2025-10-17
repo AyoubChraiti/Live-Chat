@@ -15,13 +15,13 @@ A real-time chat application built with **React** (frontend) and **Fastify + Web
 ## 🖼️ Screenshots
 
 ### Landing Page
-![Landing Page Screenshot](./frontend/src/assets/landingPage.png)
+![Landing Page Screenshot](./front/src/assets/landingPage.png)
 
 ### Login / Register
-![Login/Register Screenshot](./frontend/src/assets/LoginRegister.png)
+![Login/Register Screenshot](./front/src/assets/LoginRegister.png)
 
 ### Chat Interface
-![Chat Interface Screenshot](./frontend/src/assets/ChatUI.png)
+![Chat Interface Screenshot](./front/src/assets/ChatUI.png)
 
 ## 🛠️ Tech Stack
 
