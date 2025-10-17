@@ -30,11 +30,11 @@ Users can register, log in, send messages instantly, and manage profiles in a re
 
 ## 🛠️ Tech Stack
 
-**Frontend:** ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=flat-square) ![Vite](https://img.shields.io/badge/Vite-646cff?logo=vite&logoColor=white&style=flat-square) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white&style=flat-square) — React, Vite, Tailwind CSS
+**Frontend:** ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=flat-square) ![Vite](https://img.shields.io/badge/Vite-646cff?logo=vite&logoColor=white&style=flat-square) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white&style=flat-square)
 
-**Backend:** ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white&style=flat-square) ![Fastify](https://img.shields.io/badge/Fastify-000000?logo=fastify&logoColor=white&style=flat-square) ![WebSocket](https://img.shields.io/badge/WebSocket-007ACC?logo=websocket&logoColor=white&style=flat-square) — Node.js, Fastify, WebSocket
+**Backend:** ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white&style=flat-square) ![Fastify](https://img.shields.io/badge/Fastify-000000?logo=fastify&logoColor=white&style=flat-square) ![WebSocket](https://img.shields.io/badge/WebSocket-007ACC?logo=websocket&logoColor=white&style=flat-square)
 
-**Database:** ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white&style=flat-square) — SQLite
+**Database:** ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white&style=flat-square)
 
 ---
 
