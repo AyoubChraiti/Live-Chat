@@ -4,7 +4,7 @@
 
 A real-time chat application built with **React** (frontend) and **Fastify + WebSocket** (backend). Users can register, log in, send messages instantly, and manage profiles in a responsive, modern UI.
 
-## 🚀 Features
+## Features
 
 - 🔐 User authentication (registration & login)
 - 💬 Real-time messaging powered by WebSocket
@@ -12,7 +12,7 @@ A real-time chat application built with **React** (frontend) and **Fastify + Web
 - ⚡ Fast and lightweight backend using Fastify
 - 🌐 CORS-enabled for seamless frontend–backend communication
 
-## 🖼️ Screenshots
+## Screenshots
 
 ### Landing Page
 ![Landing Page Screenshot](./front/src/assets/landingPage.png)
@@ -23,7 +23,7 @@ A real-time chat application built with **React** (frontend) and **Fastify + Web
 ### Chat Interface
 ![Chat Interface Screenshot](./front/src/assets/ChatUI.png)
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 **Frontend:**  
 ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=flat-square) ![Vite](https://img.shields.io/badge/Vite-646cff?logo=vite&logoColor=white&style=flat-square) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white&style=flat-square)
@@ -34,11 +34,10 @@ A real-time chat application built with **React** (frontend) and **Fastify + Web
 **Database:**  
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white&style=flat-square)
 
-## ⚙️ Setup
+## Setup
 
 ### Prerequisites
-- Node.js >= 20.0.0
-- npm (comes with Node.js)
+- Node.js
 
 ### Installation
 1. Clone the repository:
