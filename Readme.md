@@ -37,7 +37,7 @@ A real-time chat application built with **React** (frontend) and **Fastify + Web
 ## Setup
 
 ### Prerequisites
-- Node.js
+- Node.js version > 20.0
 
 ### Installation
 1. Clone the repository:
