@@ -88,7 +88,6 @@ export function setupWebSocket(fastify: FastifyInstance): void {
               );
             }
           }
-          // idnt think this is used ig. 
           else if (type === 'typing' && receiverId !== undefined) {
             const receiverSocket = connections.get(receiverId);
             if (receiverSocket) {

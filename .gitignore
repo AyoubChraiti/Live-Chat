@@ -16,6 +16,7 @@ back/chat.db
 # Environment
 .env.local
 .env.*.local
+.env
 
 # IDE
 .vscode/
