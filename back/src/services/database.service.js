@@ -1,21 +1,13 @@
-import sqlite3 from 'sqlite3';
-import { config } from '../config';
-import {
-  User,
-  Message,
-  GameInvitation,
-  Tournament
-} from '../types';
+const sqlite3 = require('sqlite3').verbose();
+const { config } = require('../config');
 
-export class DatabaseService {
-  private db: sqlite3.Database;
-
+class DatabaseService {
   constructor() {
     this.db = new sqlite3.Database(config.dbPath);
     this.initializeTables();
   }
 
-  private initializeTables(): void {
+  initializeTables() {
     this.db.serialize(() => {
       // Users table
       this.db.run(`CREATE TABLE IF NOT EXISTS users (
@@ -85,7 +77,7 @@ export class DatabaseService {
   }
 
   // User operations
-  createUser(username: string, hashedPassword: string): Promise<number> {
+  createUser(username, hashedPassword) {
     return new Promise((resolve, reject) => {
       this.db.run(
         'INSERT INTO users (username, password) VALUES (?, ?)',
@@ -98,12 +90,12 @@ export class DatabaseService {
     });
   }
 
-  getUserByCredentials(username: string, hashedPassword: string): Promise<User | undefined> {
+  getUserByCredentials(username, hashedPassword) {
     return new Promise((resolve, reject) => {
       this.db.get(
         'SELECT * FROM users WHERE username = ? AND password = ?',
         [username, hashedPassword],
-        (err, row: User) => {
+        (err, row) => {
           if (err)
             reject(err);
           else
@@ -113,12 +105,12 @@ export class DatabaseService {
     });
   }
 
-  getUserById(id: number): Promise<User | undefined> {
+  getUserById(id) {
     return new Promise((resolve, reject) => {
       this.db.get(
         'SELECT id, username, bio, avatar, status, created_at FROM users WHERE id = ?',
         [id],
-        (err, row: User) => {
+        (err, row) => {
           if (err)
             reject(err);
           else 
@@ -128,12 +120,12 @@ export class DatabaseService {
     });
   }
 
-  getAllUsers(): Promise<User[]> {
+  getAllUsers() {
     return new Promise((resolve, reject) => {
       this.db.all(
         'SELECT id, username, status FROM users',
         [],
-        (err, rows: User[]) => {
+        (err, rows) => {
           if (err)
             reject(err);
           else 
@@ -143,7 +135,7 @@ export class DatabaseService {
     });
   }
 
-  updateUserProfile(id: number, bio: string, avatar: string): Promise<void> {
+  updateUserProfile(id, bio, avatar) {
     return new Promise((resolve, reject) => {
       this.db.run(
         'UPDATE users SET bio = ?, avatar = ? WHERE id = ?',
@@ -156,7 +148,7 @@ export class DatabaseService {
     });
   }
 
-  updateUserStatus(id: number, status: 'online' | 'offline'): Promise<void> {
+  updateUserStatus(id, status) {
     return new Promise((resolve, reject) => {
       this.db.run(
         'UPDATE users SET status = ? WHERE id = ?',
@@ -170,7 +162,7 @@ export class DatabaseService {
   }
 
   // Message operations
-  createMessage(senderId: number, receiverId: number, content: string): Promise<number> {
+  createMessage(senderId, receiverId, content) {
     return new Promise((resolve, reject) => {
       this.db.run(
         'INSERT INTO messages (sender_id, receiver_id, content) VALUES (?, ?, ?)',
@@ -183,12 +175,12 @@ export class DatabaseService {
     });
   }
 
-  getMessageById(id: number): Promise<Message | undefined> {
+  getMessageById(id) {
     return new Promise((resolve, reject) => {
       this.db.get(
         'SELECT * FROM messages WHERE id = ?',
         [id],
-        (err, row: Message) => {
+        (err, row) => {
           if (err)
             reject(err);
           else
@@ -198,7 +190,7 @@ export class DatabaseService {
     });
   }
 
-  getConversation(userId1: number, userId2: number): Promise<any[]> {
+  getConversation(userId1, userId2) {
     return new Promise((resolve, reject) => {
       this.db.all(
         `SELECT m.*, u.username as sender_username 
@@ -217,7 +209,7 @@ export class DatabaseService {
   }
 
   // Blocking operations
-  isBlocked(blockerId: number, blockedId: number): Promise<boolean> {
+  isBlocked(blockerId, blockedId) {
     return new Promise((resolve, reject) => {
       this.db.get(
         'SELECT * FROM blocked_users WHERE blocker_id = ? AND blocked_id = ?',
@@ -230,7 +222,7 @@ export class DatabaseService {
     });
   }
 
-  blockUser(blockerId: number, blockedId: number): Promise<void> {
+  blockUser(blockerId, blockedId) {
     return new Promise((resolve, reject) => {
       this.db.run(
         'INSERT INTO blocked_users (blocker_id, blocked_id) VALUES (?, ?)',
@@ -243,7 +235,7 @@ export class DatabaseService {
     });
   }
 
-  unblockUser(blockerId: number, blockedId: number): Promise<void> {
+  unblockUser(blockerId, blockedId) {
     return new Promise((resolve, reject) => {
       this.db.run(
         'DELETE FROM blocked_users WHERE blocker_id = ? AND blocked_id = ?',
@@ -256,14 +248,14 @@ export class DatabaseService {
     });
   }
 
-  getBlockedUsers(userId: number): Promise<User[]> {
+  getBlockedUsers(userId) {
     return new Promise((resolve, reject) => {
       this.db.all(
         `SELECT u.id, u.username FROM users u
          JOIN blocked_users b ON u.id = b.blocked_id
          WHERE b.blocker_id = ?`,
         [userId],
-        (err, rows: User[]) => {
+        (err, rows) => {
           if (err) reject(err);
           else resolve(rows);
         }
@@ -272,7 +264,7 @@ export class DatabaseService {
   }
 
   // Game invitation operations
-  createGameInvitation(senderId: number, receiverId: number): Promise<number> {
+  createGameInvitation(senderId, receiverId) {
     return new Promise((resolve, reject) => {
       this.db.run(
         'INSERT INTO game_invitations (sender_id, receiver_id) VALUES (?, ?)',
@@ -285,7 +277,7 @@ export class DatabaseService {
     });
   }
 
-  updateGameInvitationStatus(inviteId: number, status: string): Promise<void> {
+  updateGameInvitationStatus(inviteId, status) {
     return new Promise((resolve, reject) => {
       this.db.run(
         'UPDATE game_invitations SET status = ? WHERE id = ?',
@@ -298,12 +290,12 @@ export class DatabaseService {
     });
   }
 
-  getGameInvitation(inviteId: number): Promise<GameInvitation | undefined> {
+  getGameInvitation(inviteId) {
     return new Promise((resolve, reject) => {
       this.db.get(
         'SELECT sender_id, receiver_id FROM game_invitations WHERE id = ?',
         [inviteId],
-        (err, row: GameInvitation) => {
+        (err, row) => {
           if (err) reject(err);
           else resolve(row);
         }
@@ -312,12 +304,12 @@ export class DatabaseService {
   }
 
   // Tournament operations
-  async createTournament(name: string, participants: number[]): Promise<number> {
-    const tournamentId = await new Promise<number>((resolve, reject) => {
+  async createTournament(name, participants) {
+    const tournamentId = await new Promise((resolve, reject) => {
       this.db.run(
         'INSERT INTO tournaments (name, status) VALUES (?, ?)',
         [name, 'pending'],
-        function (this: sqlite3.RunResult, err: Error | null) {
+        function (err) {
           if (err) reject(err);
           else resolve(this.lastID);
         }
@@ -332,20 +324,20 @@ export class DatabaseService {
       stmt.run(tournamentId, participants[i], i + 1);
     }
 
-    return new Promise<number>((resolve, reject) => {
-      stmt.finalize((err: Error | null) => {
+    return new Promise((resolve, reject) => {
+      stmt.finalize((err) => {
         if (err) reject(err);
         else resolve(tournamentId);
       });
     });
   }
 
-  getTournament(id: number): Promise<Tournament | undefined> {
+  getTournament(id) {
     return new Promise((resolve, reject) => {
       this.db.get(
         'SELECT name FROM tournaments WHERE id = ?',
         [id],
-        (err, row: Tournament) => {
+        (err, row) => {
           if (err) reject(err);
           else resolve(row);
         }
@@ -353,9 +345,11 @@ export class DatabaseService {
     });
   }
 
-  getDatabase(): sqlite3.Database {
+  getDatabase() {
     return this.db;
   }
 }
 
-export const databaseService = new DatabaseService();
+const databaseService = new DatabaseService();
+
+module.exports = { DatabaseService, databaseService };

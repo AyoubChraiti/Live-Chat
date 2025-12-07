@@ -1,11 +1,10 @@
-import type { FastifyInstance } from 'fastify';
-import { databaseService } from '../services/database.service';
-import { hashPassword } from '../utils/crypto';
+const { databaseService } = require('../services/database.service');
+const { hashPassword } = require('../utils/crypto');
 
-export async function authRoutes(fastify: FastifyInstance) {
+async function authRoutes(fastify) {
   // usr regis
   fastify.post('/api/register', async (request, reply) => {
-    const { username, password } = request.body as { username: string; password: string };
+    const { username, password } = request.body;
     const hashedPassword = hashPassword(password);
 
     try {
@@ -18,7 +17,7 @@ export async function authRoutes(fastify: FastifyInstance) {
 
   // urs login
   fastify.post('/api/login', async (request, reply) => {
-    const { username, password } = request.body as { username: string; password: string };
+    const { username, password } = request.body;
     const hashedPassword = hashPassword(password);
 
     try {
@@ -36,3 +35,5 @@ export async function authRoutes(fastify: FastifyInstance) {
     }
   });
 }
+
+module.exports = { authRoutes };

@@ -1,13 +1,13 @@
-import crypto from 'crypto';
+const crypto = require('crypto');
 
 // for haching password
 
-export function hashPassword(password: string): string {
+function hashPassword(password) {
   return crypto.createHash('sha256').update(password).digest('hex');
 }
 
-export function escapeHtml(text: string): string {
-  const map: Record<string, string> = {
+function escapeHtml(text) {
+  const map = {
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
@@ -16,3 +16,5 @@ export function escapeHtml(text: string): string {
   };
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
+
+module.exports = { hashPassword, escapeHtml };

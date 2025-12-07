@@ -1,10 +1,9 @@
-import type { FastifyInstance } from 'fastify';
-import { databaseService } from '../services/database.service';
+const { databaseService } = require('../services/database.service');
 
-export async function messageRoutes(fastify: FastifyInstance) {
+async function messageRoutes(fastify) {
   // Get conversation history
   fastify.get('/api/messages/:userId/:otherUserId', async (request, reply) => {
-    const { userId, otherUserId } = request.params as { userId: string; otherUserId: string };
+    const { userId, otherUserId } = request.params;
 
     try {
       const messages = await databaseService.getConversation(
@@ -17,3 +16,5 @@ export async function messageRoutes(fastify: FastifyInstance) {
     }
   });
 }
+
+module.exports = { messageRoutes };

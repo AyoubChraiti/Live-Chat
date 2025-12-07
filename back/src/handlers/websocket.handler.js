@@ -1,12 +1,9 @@
-import type { FastifyInstance } from 'fastify';
-import type { WebSocket } from 'ws';
-import { databaseService } from '../services/database.service';
-import { WebSocketMessage } from '../types';
+const { databaseService } = require('../services/database.service');
 
 // ws connections store
-const connections = new Map<number, WebSocket>();
+const connections = new Map();
 
-export function broadcastToUser(userId: number, data: any): void {
+function broadcastToUser(userId, data) {
   const userIdNum = parseInt(String(userId));
   const conn = connections.get(userIdNum);
   
@@ -23,12 +20,12 @@ export function broadcastToUser(userId: number, data: any): void {
   }
 }
 
-export function setupWebSocket(fastify: FastifyInstance): void {
+function setupWebSocket(fastify) {
   fastify.register(async function(fastify) {
     fastify.get('/ws', { websocket: true }, (connection, _req) => {
-      connection.socket.on('message', async (message: Buffer) => {
+      connection.socket.on('message', async (message) => {
         try {
-          const data: WebSocketMessage = JSON.parse(message.toString());
+          const data = JSON.parse(message.toString());
           const { type, userId, receiverId, content, tempId } = data;
 
           if (type === 'auth') {
@@ -119,4 +116,4 @@ export function setupWebSocket(fastify: FastifyInstance): void {
   });
 }
 
-export { connections };
+module.exports = { broadcastToUser, setupWebSocket, connections };

@@ -2,12 +2,10 @@
   "name": "chat-app-backend",
   "version": "1.0.0",
   "description": "Backend server for Live Chat App",
-  "main": "dist/server.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "npm run build && node dist/server.js",
-    "dev": "nodemon --watch src --exec ts-node src/server.ts",
-    "build": "tsc",
-    "clean": "rm -rf dist"
+    "start": "node src/server.js",
+    "dev": "nodemon --watch src src/server.js"
   },
   "dependencies": {
     "fastify": "^4.24.3",
@@ -17,19 +15,14 @@
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "@types/sqlite3": "^3.1.11",
-    "@types/ws": "^8.5.10",
-    "nodemon": "^3.0.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "nodemon": "^3.0.2"
   },
   "keywords": [
     "chat",
     "websocket",
     "real-time",
     "fastify",
-    "typescript"
+    "javascript"
   ],
   "author": "",
   "license": "MIT"
